@@ -1,42 +1,42 @@
-from aplicacao.produtos import Produtos;
+from aplicacao.estoque import Produtos;
 
 class Carrinho(Produtos):
     def __init__(self):
         super().__init__()
-        self.itensCarrinho = []
-        self.quantidadeDeItensNoCarrinho = 0
-        self.subTotal = 0.0
+        self.__itensCarrinho = []
+        self.__quantidadeDeItensNoCarrinho = 0
+        self.__subTotal = 0.0
     
-    def _adicionarProdutoNoCarrinho(self):
+    def adicionarProdutoNoCarrinho(self):
         addProduto = input("Digite o nome do produto a ser adicionado: ")
-        if addProduto in self.itensCarrinho:
+        if addProduto in self.__itensCarrinho:
             print(f'{addProduto} já está no carrinho')
             return
         
         print(f'Produto adicionado no carrinho!')
-        self.itensCarrinho.append(addProduto.lower())
+        self.__itensCarrinho.append(addProduto.lower())
 
-    def _removerProdutoDoCarrinho(self):
+    def removerProdutoDoCarrinho(self):
         removerProduto = input("Digite o nome do produto a ser removido: ")
-        if not self.itensCarrinho:
+        if not self.__itensCarrinho:
             print("Carrinho vazio!")
             return
-        elif removerProduto in self.itensCarrinho:
+        elif removerProduto in self.__itensCarrinho:
             print(f'{removerProduto} foi removido do carrinho!')
-            self.itensCarrinho.remove(removerProduto.lower())
+            self.__itensCarrinho.remove(removerProduto.lower())
             return
         
         print(f'{removerProduto} não está no carrinho!')
     
-    def _itensDoCarrinho(self):
+    def itensDoCarrinho(self):
         print('Itens adicionados ao carrinho⬇️')
-        for item in self.itensCarrinho:
+        for item in self.__itensCarrinho:
             print(item)
 
-    def _valorDaCompra(self):
-        for item in self.itensCarrinho:
+    def valorDaCompra(self):
+        for item in self.__itensCarrinho:
             if item in self.produtosDisponiveis:
-                self.subTotal += self.produtosDisponiveis.get(item)
+                self.__subTotal += self.produtosDisponiveis.get(item)
             else:
                 print(f'{item} não está disponivel!')
-        print(f'O valor da compra foi de R$ {self.subTotal}!')
+        print(f'O subtotal do carrinho é de R$ {self.__subTotal}!')
